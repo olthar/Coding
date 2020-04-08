@@ -27,3 +27,5 @@ function printQuote(message) {
   //Auto refresh
 
   //background colour changes with quote
+
+  console.log("Hello World!")
