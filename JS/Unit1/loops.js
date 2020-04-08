@@ -1,4 +1,4 @@
-// guesses what the random number is. 
+// guesses what the random number is. This is a test of GIT
 
 let upper = 2500;
 const randomNumber = getRandomNumber(upper);
