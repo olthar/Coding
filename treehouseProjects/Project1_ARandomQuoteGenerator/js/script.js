@@ -1,11 +1,4 @@
-/******************************************
-Treehouse FSJS Techdegree:
-project 1 - A Random Quote Generator
-******************************************/
-
-// For assistance: 
-  // Check the "Project Resources" section of the project instructions
-  // Reach out in your Slack community - https://treehouse-fsjs-102.slack.com/app_redirect?channel=chit-chat
+// Quotes are displayed at random and can be changed when button pressed. 
 
 // quotes array
   const quotes = [
@@ -48,7 +41,7 @@ function getRandomQuote(arr){
 
 //Print quote function returns html
 function printQuote() {
-  do { //repeat the process if same quote is chosen twice
+  do { //repeat the process of generating quote if same quote is chosen twice
     messageQuote = getRandomQuote(quotes);
     html = `<p class="quote"> ${messageQuote.quote} </p><p class="source"> ${messageQuote.source}`
     for ( var prop in messageQuote ) {
@@ -68,12 +61,7 @@ function printQuote() {
 }
 
 // changes quote every 5 seconds 
-setInterval(printQuote, 5000);
+setInterval(printQuote, 10000);
 
-
-/***
- * click event listener for the print quote button
- * DO NOT CHANGE THE CODE BELOW!!
-***/
-
+// button loads new quote
 document.getElementById('load-quote').addEventListener("click", printQuote, false);
