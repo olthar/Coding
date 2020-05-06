@@ -1,8 +1,11 @@
+
+
 /******************************************
 Treehouse Techdegree:
 FSJS project 2 - List Filter and Pagination
 ******************************************/
    
+
 const li = document.querySelector('.student-list');
 const studentsPerPage = 10;
 
