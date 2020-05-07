@@ -1,15 +1,95 @@
-const usernameInput = document.getElementById("name");
+
 const jobRole = document.getElementById("title");
 const otherBox = document.getElementById("other-div")
 const design = document.getElementById("design")
 const color = document.getElementById("colors-js-puns")
 const activities = document.querySelector(".activities")
+const paymentInfo = document.getElementById("payment")
+const creditcard = document.getElementById("credit-card")
+
+const usernameInput = document.getElementById("name");
+const emailInput = document.getElementById("mail");
+const cardNumber = document.getElementById("cc-num");
+const zipCode = document.getElementById("zip");
+const cvv = document.getElementById("cvv");
+const submit = document.getElementById("submit")
+
+// submit.addEventListener('click',(e) => {
+//         e.preventDefault();
+//         console.log(e.target.tagName)
+// })
+
+// if user name is empty, sumbit will not work
+function isValidUsername(username) {
+    return (username) ? true : false   
+}
+function isValidEmail(email) {
+    return /^[A-Z0-9+_.-]+@[A-Z0-9.-]+$/i.test(email)
+}
+function isValidActivites(activities) {
+    return (cost > 0) ? true : false   
+}
+function isValidCCNumber(number) {
+    return /^\d{13,16}$/.test(number)
+}
+function isValidZip(zip) {
+    return /^\d{5}$/.test(zip)
+}
+function isValidCVV(cvv) {
+    return /^\d{3}$/.test(cvv)
+}
+//add one for acticities
+//clear previous ones
+function errorEmptyMessage(input){
+    input.style.borderColor = "red"
+    const element = document.createElement('span')
+    element.textContent = "Please fill in"
+    element.style.color = "Red"
+    input.parentNode.insertBefore(element, input)
+}
+function createListener(validator, input){
+    return e => {  
+        if(e.target.tagName === 'BUTTON'){
+            e.preventDefault()
+            text = input.value
+            const valid = validator(text)
+            console.log(valid)
+            // const isValid = text !== "" && !valid
+            valid ? "" : errorEmptyMessage(input)
+            // errorInvalidMessage(input)
+        }
+    }
+}
+// usernameInput.addEventListener("input", createListener(isValidUsername));
+submit.addEventListener("click", createListener(isValidUsername, usernameInput));
+submit.addEventListener("click", createListener(isValidEmail, emailInput));
+submit.addEventListener("click", createListener(isValidActivites, activities));
+submit.addEventListener("click", createListener(isValidCCNumber, cardNumber));
+submit.addEventListener("click", createListener(isValidZip, zipCode));
+submit.addEventListener("click", createListener(isValidCVV, cvv));
+
+
+
+//Create the total for activities
+const total = document.createElement("h2")
+activities.appendChild(total)
+total.style.display = "none"
+
 let cost = 0;
 
 usernameInput.focus();
-otherBox.style.display = "none"
-color.style.display = "none"
 
+
+
+function hideShowElement(element, h){
+    for (let i=0; i < element.length; i+=1){
+        const elementDOM = document.getElementById(element[i])
+        // console.log(elementDOM)
+        elementDOM.style.display = ((h) ? h : '')
+    }
+}
+let hide = ["other-div", "colors-js-puns", "paypal", "bitcoin"]
+hideShowElement(hide, "none")
 
 // console.log(activitiesList)
 
@@ -35,10 +115,9 @@ jobRole.addEventListener('change',(e) => {
  });
 
  // figure out how to show the first color is relevent for 1 heart JS
- design.addEventListener('change',(e) => {
+design.addEventListener('change',(e) => {
     // e.preventDefault();
     const colors = document.getElementById("color").children
-    console.log(colors)
     const designChoice = event.target.value;
     if (designChoice === 'js puns'){
         color.style.display = ""
@@ -59,6 +138,7 @@ jobRole.addEventListener('change',(e) => {
             else {colors[i].style.display = "none"} 
         }
     } else {color.style.display = "none"}
+
 });
 
 
@@ -98,13 +178,17 @@ activities.addEventListener('change', (e) => {
             const activitiesList = activities.getElementsByTagName("input")
             const checkUncheck = e.target.checked
             let itemCost = parseInt(e.target.getAttribute("data-cost"))
-            console.log(checkUncheck)
+            //Calculates the cost of the activities
+            if (checkUncheck === true){
+                cost += itemCost
+            } else {
+                cost -= itemCost
+            }
+            console.log(itemCost)
+            console.log(cost)
             // Grey out activities that conflict with time and date of chosen one. 
             if (dateTime === null){
             } else { 
-                    // let itemCost = parseInt(e.target.getAttribute("data-cost"))
-                    // cost + itemCost
-                    // console.log(cost)
                     for (let i = 0; i < activitiesList.length; i++) {
                         const choseDateTime = activitiesList[i].getAttribute("data-day-and-time")
                         if (choseDateTime == dateTime && !activitiesList[i].checked && checkUncheck){     
@@ -116,4 +200,27 @@ activities.addEventListener('change', (e) => {
                         }
                     }
             }
+    //Displays total for actvities if there is one. 
+    if (cost === 0){
+        total.style.display = "none"
+
+    } else {   
+        total.textContent = `Total: \$${cost}`
+        total.style.display = ""
+    }
 })
+
+paymentInfo.addEventListener('change',(e) => {
+    // const paymentTypes = paymentInfo.parentElement.getElementsByTagName("div")
+    // console.log(paymentTypes)
+    // Hide elements previously chosen
+    hideShowElement(["paypal", "bitcoin", "credit-card"], "none")
+    const paymentChosen = e.target.value;
+    //remove space from chosen payment
+    const paymentOne = paymentChosen.replace(/\s/g, '-')
+    hideShowElement([paymentOne])
+
+
+});
+
+

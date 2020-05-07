@@ -63,7 +63,7 @@ function createListener(validator) {
   return e => {
     const text = e.target.value;
     const valid = validator(text);
-    const showTip = text !== "" && !valid;
+    const showTip = text == "" && !valid;
     const tooltip = e.target.nextElementSibling;
     showOrHideTip(showTip, tooltip);
   };
