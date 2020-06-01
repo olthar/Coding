@@ -22,6 +22,7 @@ let cost = 0;
 let paymentOne = "credit-card"
 
 //Function to create error messages where needed and hide them. 
+//takes the elements listed in fieldsToValidate, creates a span with an error next to that field. 
 function createErrorEmptyMessage(input){
     for (let i=0; i<input.length;i+=1){        
         const currentInput = input[i]
@@ -51,9 +52,12 @@ function isValidActivites(activities) {
     return [(cost > 0) ? true : false, ""]   
 }
 function isValidCCNumber(number) {
+    //creates an array with various outcomes depending on the user input
     const ccNumValid = []
+    //does CC Number input contain anything other than digits
     if (/[\D]+/.test(number)){
         ccNumValid.push (false, "Only numbers are valid")
+    //is the credit card number between 13-16 digits long. 
     } else if (/^\d{13,16}$/.test(number)){
         ccNumValid.push (true, "")
     } else {
@@ -72,9 +76,37 @@ function isValidCVV(cvv) {
 function formatCCNumber(text) {
     const regex = /^\D*(\d{4})\D*(\d{4})\D*(\d{4})\D*(\d{1,4})\D*$/;
     return text.replace(regex, '$1-$2-$3-$4');
-    
-  
   }
+
+//Function feeds validator based on input or submit button
+function createListener(validators, list){
+    return e => {  
+        e.preventDefault()
+        if (e.target.tagName == "BUTTON"){
+            //takes the list of validators and list of elements to cycle through the validators, 
+            if(paymentOne == "credit-card"){
+                for (let i=0; i < list.length;i+=1){
+                    const validator = validators[i]
+                    const text = list[i].value
+                    const validActive = validator(text)
+                    showHideError(list[i], validActive, text)
+                }
+            //if paypal or bitcoin are selected, it doesn't validate credit card. 
+            } else {
+                for (let i=0; i < 3;i+=1){
+                    const validator = validators[i]
+                    const text = list[i].value
+                    const validActive = validator(text)
+                    showHideError(list[i], validActive, text)
+               }
+            }
+        } else {
+            const text = e.target.value
+            const valid = validators(text)
+            showHideError(e.target, valid, text)    
+        }
+    }
+}
 
 //Function to show or hide error messages based on validity.
 function showHideError(selected, show, text){
@@ -107,12 +139,11 @@ function hideShowElement(element, show){
         elementDOM.style.display = ((show) ? show : '')
     }
 }
-//Function to make the color display box have Tomato in the box rather than cornflower if I heart JS is selected. 
+//Function to make the color display box have Tomato in the box rather than cornflower if I heart JS is selected and visa versa
 function selectElement(id, valueToSelect) {    
     let element = document.getElementById(id);
     element.value = valueToSelect;
 }
-
 
 /*
 ON LOADING THE PAGE
@@ -121,12 +152,18 @@ ON LOADING THE PAGE
 //Puts cursor in the username on form load
 usernameInput.focus();
 
-//Hide elements on load of page;
+//Hide elements on load of page by ID;
 let hideElements = ["other-div", "colors-js-puns", "paypal", "bitcoin", "select method"]
 hideShowElement(hideElements, "none")
 
+//Create a "Please select a T-shirt theme"
+const colorSelect = document.createElement('option')
+colorSelect.value = "select"
+colorSelect.textContent = "Please select a T-shirt theme"
+color.insertBefore(colorSelect, color.firstElementChild)
 
-//Create the total cost for activities
+
+//Create the total cost for activities and hides it intially
 const total = document.createElement("h2")
 activities.appendChild(total)
 total.style.display = "none"
@@ -147,6 +184,7 @@ jobRole.addEventListener('change',(e) => {
         otherBox.style.display = "none";;
     }    
 });
+
  // Listener for change in color selection that provides a list of colors in relation to the selected theme. 
 design.addEventListener('change',(e) => {
     const colors = color.children
@@ -158,7 +196,7 @@ design.addEventListener('change',(e) => {
                 colors[i].value === "darkslategrey" ||
                 colors[i].value === "gold")
                 {colors[i].style.display = ""
-                selectElement('color', "cornflowerblue")}
+                selectElement('color', "select")}
             else {colors[i].style.display = "none"} 
         }
     } else if (designChoice === 'heart js') { 
@@ -168,13 +206,14 @@ design.addEventListener('change',(e) => {
                 colors[i].value === "steelblue" ||
                 colors[i].value === "dimgrey")
                 {colors[i].style.display = ""
-                selectElement('color', 'tomato')
+                selectElement('color', 'select')
             }
             else {colors[i].style.display = "none"} 
         }
      //Hides color choice again if Design is deselected.    
     } else {color.parentElement.style.display = "none"}
 });
+
 //Listener for the activites checkboxes which grey out activities at conflicting times and creates a total cost at the bottom. 
 activities.addEventListener('change', (e) => {
             const activityChosen = e.target;
@@ -215,6 +254,7 @@ activities.addEventListener('change', (e) => {
     }
 })
 
+//shows relevent payment options based on selected payment option
 paymentInfo.addEventListener('change',(e) => {
     // Hide payment options that may have been previously chosen
     hideShowElement(["paypal", "bitcoin", "credit-card"], "none")
@@ -224,35 +264,6 @@ paymentInfo.addEventListener('change',(e) => {
     hideShowElement([paymentOne])
 });
 
-//Trigger validation events based on input or submit button
-function createListener(validators, list){
-    return e => {  
-        e.preventDefault()
-        if (e.target.tagName == "BUTTON"){
-            //takes the list of validators and list of elements to cycle through the validators, 
-            if(paymentOne == "credit-card"){
-                for (let i=0; i < list.length;i+=1){
-                    const validator = validators[i]
-                    const text = list[i].value
-                    const validActive = validator(text)
-                    showHideError(list[i], validActive, text)
-                }
-            //if paypal or bitcoin are selected, it doesn't validate credit card. 
-            } else {
-                for (let i=0; i < 3;i+=1){
-                    const validator = validators[i]
-                    const text = list[i].value
-                    const validActive = validator(text)
-                    showHideError(list[i], validActive, text)
-               }
-            }
-        } else {
-            const text = e.target.value
-            const valid = validators(text)
-            showHideError(e.target, valid, text)    
-        }
-    }
-}
 // Listeners for each part needing validation. 
 usernameInput.addEventListener("input", createListener(isValidUsername));
 emailInput.addEventListener("input", createListener(isValidEmail));
