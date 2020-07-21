@@ -132,6 +132,6 @@ function makeModal(indexPosition){
 
 //Perform the fetch function
 getProfiles('https://randomuser.me/api/?results=12&nat=gb,us')
-    .then(Data => profileData = Data.results)
+    .then(data => profileData = data.results)
     .then(makeCard)
     .catch(error => console.log('Looks like there was a problem!', error))
