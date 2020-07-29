@@ -3,10 +3,11 @@ const express = require('express');
 
 const app = express();
 
+app.use('/static', express.static('public'));
 
 app.set('view engine', 'pug');
 
-const mainRoutes = require('./routes');
+const mainRoutes = require('./routes/index');
 const aboutRoutes = require('./routes/about');
 const projectRoutes = require('./routes/project');
 
@@ -15,4 +16,6 @@ app.use('/about', aboutRoutes);
 app.use('/project', projectRoutes);
 
 
-app.listen(3000)
+app.listen(3000, () => {
+    console.log('The application is running on localhost:3000!')
+});

@@ -6,7 +6,8 @@ const { projects } = require('../data/data.json');
 
 router.get('/', (req, res) => {
     console.log("projects working")
-    console.log(projects[1])
+    console.log(projects[1]);
+    res.render('project');
     
 });
 
