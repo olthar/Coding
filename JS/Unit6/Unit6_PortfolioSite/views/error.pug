@@ -1,0 +1,9 @@
+extends layout
+
+block content
+  section.desk
+    h1= `${error.message} - Status: ${error.status}`
+    //- img.desk-items(src='/static/images/profile.jpg')
+    a.button-error(href='/') Go Home
+    .error
+      pre.stack-trace= error.stack

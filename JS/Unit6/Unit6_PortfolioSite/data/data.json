@@ -2,11 +2,11 @@
   "projects": [
     {
       "id": 1,
-      "project_name": "Random Quotes Generator",
-      "description": "This project creates an app that displays famous random quotes that are updated every 10 seconds or with the click of a mouse.",
-      "technologies": ["VSCode", "JavaScript"],
-      "live_link": "https://browe83.github.io/Techdegree-Project-1/a_random_quote_generator-v1/index.html",
-      "github_link": "https://github.com/browe83/Techdegree-Project-1",
+      "project_name": "Random Quote Generator",
+      "description": "Click on the start screen to display famous random quotes; click through the various quotes or wait 10 seconds for a new one to appear.",
+      "technologies": ["JavaScript", "CSS", "HTML", "VSCode"],
+      "live_link": "https://olthar.github.io/Unit1_RandomQuotes/",
+      "github_link": "https://github.com/olthar/Unit1_RandomQuotes.git",
       "image_urls": [
         "/static/images/Project_1_Img_1.png",
         "/static/images/Project_1_Img_2.png"
@@ -15,10 +15,10 @@
     {
       "id": 2,
       "project_name": "List Pagination and Filtering",
-      "description": "This project enhances a web page using pagination and filtering.",
-      "technologies": ["VSCode", "JavaScript"],
-      "live_link": "https://browe83.github.io/Techdegree-Project-2/list_pagination_and_filtering-v1/index.html",
-      "github_link": "https://github.com/browe83/Techdegree-Project-2",
+      "description": "Using pagination and filtering to enhance usability of a webpage.",
+      "technologies": ["JavaScript", "CSS", "HTML", "VSCode"],
+      "live_link": "https://olthar.github.io/Project2_list_pagination_and_filtering-v1/",
+      "github_link": "https://github.com/olthar/Project2_list_pagination_and_filtering-v1.git",
       "image_urls": [
         "/static/images/Project_2_Img_1.png",
         "/static/images/Project_2_Img_2.png"
@@ -27,10 +27,10 @@
     {
       "id": 3,
       "project_name": "Interactive Form",
-      "description": "This project enhances an interactive registration form for a fictional conference called 'FullStack Conf.' by adding customized and conditional behavior and interactivity and validating user input and providing helpful error messages when the user enters invalid information into the form fields.",
-      "technologies": ["VSCode", "JavaScript"],
-      "live_link": "https://browe83.github.io/Techdegree-Project-3/interactive-form-v2/index.html",
-      "github_link": "https://github.com/browe83/Techdegree-Project-3",
+      "description": "JavaScript is used to enhance an interactive registration form for a conference called 'FullStack Conf.'",
+      "technologies": ["JavaScript", "CSS", "HTML", "VSCode"],
+      "live_link": "https://olthar.github.io/Project3_InteractiveForm/",
+      "github_link": "https://github.com/olthar/Project3_InteractiveForm.git",
       "image_urls": [
         "/static/images/Project_3_Img_1.png",
         "/static/images/Project_3_Img_2.png"
@@ -39,10 +39,10 @@
     {
       "id": 4,
       "project_name": "OOP Game Show App",
-      "description": "This project creates a browser-based, word guessing game: `Phrase Hunter.' Using JavaScript and Object-Oriented Programming, it selects a random, hidden phrase, which a player tries to guess, by clicking letters on an onscreen or physical keyboard.",
-      "technologies": ["VSCode", "JavaScript"],
-      "live_link": "https://browe83.github.io/OOP-Game-Show-Project-4/oop_game-v2/index.html",
-      "github_link": "https://github.com/browe83/OOP-Game-Show-Project-4",
+      "description": "A browser-based word guessing game: `Phrase Hunter.' Using JavaScript and Object-Oriented Programming, the program selects a random, hidden phrase, which a player tries to guess, by clicking letters on an onscreen or physical keyboard.",
+      "technologies": ["JavaScript", "CSS", "HTML", "VSCode"],
+      "live_link": "https://olthar.github.io/Project4_PhraseGame/",
+      "github_link": "https://github.com/olthar/Project4_PhraseGame.git",
       "image_urls": [
         "/static/images/Project_4_Img_1.png",
         "/static/images/Project_4_Img_2.png",
@@ -53,10 +53,10 @@
     {
       "id": 5,
       "project_name": "Public API Requests",
-      "description": "This project builds an app for a fictional company called Awesome Startup, a distributed company with remote employees working all over the world. It requests a JSON object from the API and parses the data so that 12 employees are listed in a grid with their thumbnail image, full name, email, and location. Clicking the employee’s image or name will open a modal window with more detailed information, such as the employee’s birthday and address.",
-      "technologies": ["VSCode", "JavaScript"],
-      "live_link": "https://browe83.github.io/Public-API-Requests-Project-5/public_api_request-v1/index.html",
-      "github_link": "https://github.com/browe83/Public-API-Requests-Project-5",
+      "description": "An app for a fictional company called Awesome Startup, a distributed company with remote employees working all over the world. Using a JSON object from the API and parsing the data so that 12 employees are listed in a grid. Clicking the employee’s image or name will open a modal window with more detailed information.",
+      "technologies": ["JavaScript", "CSS", "HTML", "VSCode"],
+      "live_link": "https://olthar.github.io/Project5_API/",
+      "github_link": "https://github.com/olthar/Project5_API.git",
       "image_urls": [
         "/static/images/Project_5_Img_1.png",
         "/static/images/Project_5_Img_2.png",
