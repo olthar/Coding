@@ -1,38 +1,47 @@
 import React, { Component } from 'react';
+import {
+  BrowserRouter,
+  Route,
+  Switch,
+  Router
+} from 'react-router-dom';
+
 // import logo from './logo.svg';
 import './App.css';
 import axios from 'axios';
 import apiKey from './config'
 
-import {
-  BrowserRouter,
-  Route
-} from 'react-router-dom';
+
 
 // App componants
 import Photo from './Components/Photo';
 import Search from './Components/Search';
+import Test from './Components/Test';
 
 
-export default class App extends Component {
+class App extends Component {
 
   constructor() {
     super();
     this.state = {
       images: [],
-      loading: true
+      loading: true,
+      topic:''
     };
   } 
   componentDidMount() {
-    this.performSearch();
+    this.handleSearch("cats");
   }
   
-  performSearch = (query = 'cats' ) => {
-    axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=cats&per_page=24&format=json&nojsoncallback=1`)
+  handleSearch = (topic) => {
+    console.log(topic);
+    // const {match: {params}, history} = this.props
+    axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${topic}&per_page=24&format=json&nojsoncallback=1`)
     .then(response => {
       this.setState({
         images: response.data.photos.photo,
-        loading: false
+        loading: false,
+        topic
       })
     })
     .catch(error => {
@@ -45,18 +54,25 @@ render() {
   console.log("")
   return (
     <BrowserRouter>
-      <div className="container">
-        
-          <Route exact path="/search" component={Search} />
-          <Route exact path="/" render={() => 
-            (this.state.loading)
-            ? <p>Loading...</p>
-            : <Photo data={this.state.images} /> } />    
-          {/* <SearchForm onSearch={this.performSearch} />       */}
+        <div className="container">
+            {/* <Test /> */}
+            <Switch>
+            <Route path="/" render={() => <Search performSearch={this.handleSearch}/>}/>
+
+            {/* <Route exact path="/" render={() => <Photo 
+            data={this.state.images} 
+            performSearch={this.handleSearch}/> } />
+            <Route path="/photo/:topic" component={Photo}/>   */}
+              {/* <Route exact path="/photos/:search" render={() =>  
+              (this.state.loading)
+              ? <p>Loading...</p>
+              : <Photo data={this.state.images} /> } />  */}
+              
+            </Switch>
         </div>   
-     
   </BrowserRouter>
   );
 }
 }
 
+export default App;

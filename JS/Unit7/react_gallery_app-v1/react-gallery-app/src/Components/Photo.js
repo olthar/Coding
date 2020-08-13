@@ -4,8 +4,10 @@ import { Route, NavLink, Redirect } from 'react-router-dom';
 
 // import NotFound from './NotFound';
 
-const Photo = props => {
-
+const Photo = (props, {match}) => {
+  // let word = match;
+  // let topic = match.params.topic;
+  // console.log(topic)
   const results = props.data;
   let photos;
   if (results.length)
@@ -29,6 +31,7 @@ const Photo = props => {
     // </ul>
   // </nav>
   <div className="photo-container">
+    {/* <h2 >{word}</h2> */}
     <h2 >Results</h2>
       <ul>
         {photos}
