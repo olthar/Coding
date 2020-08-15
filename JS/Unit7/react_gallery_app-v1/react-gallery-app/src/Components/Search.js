@@ -1,19 +1,18 @@
 import React, { Component } from 'react';
+import { withRouter } from "react-router-dom";
 
 class Search extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
         let searchTopic = this.topic.value;
-        let path = `photo/${searchTopic}`;
-        console.log(path)
-        // this.props.history.push(path); 
+        let path = `/photo/${searchTopic}`;
+        this.props.history.push(path); 
+        this.topic.value = "";
         // this.props.performSearch(searchTopic)
       }
 
       render() {
-        const {history} = this.props;
-        console.log(history)
           return (
             <form className="search-form" onSubmit={this.handleSubmit}>
                 <input type="search" name="search" placeholder="Search" ref={ (input) => this.topic = input } required/>
@@ -28,7 +27,7 @@ class Search extends Component {
       }
 }
 
-export default Search;
+export default withRouter(Search);
 
 
 
