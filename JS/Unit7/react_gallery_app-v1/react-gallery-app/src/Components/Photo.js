@@ -1,26 +1,22 @@
 import React from 'react';
-import Image from './image'
-
-// import NotFound from './NotFound';
+import Image from './Image'
+import NoResults from './NoResults'
 
 const Photo = (props) => {
 //Topic is taken from the url
   let topic = (props.match.params.searchURL)
   let results;
-
-  //When the search topic either submitted by the search bar or typing into url is new, the results displayed are updated
-  if (props.currentTopic === topic || props.images[topic]) { 
-    (props.images[topic])
-    ? results = props.images[topic]
-    : results = props.search.results
-  } else { 
-    props.performSearch(topic)
-    }
-
   let photos;
-  if (results)
-    photos = results.map( photo => 
 
+//If the URL Parameter is in base three topics, it passes in those to results
+  (props.images[topic])
+  ? results = props.images[topic]
+  // If not, results is given the related search images
+  : results = props.search.results;
+
+  //if there are photos, these are mapped through the image component
+  if (results.length > 0){
+    photos = results.map( photo => 
     <Image
       farm={photo.farm} 
       server={photo.server}
@@ -28,7 +24,12 @@ const Photo = (props) => {
       secret={photo.secret}
       key={photo.id}
     />
-  )
+  ) 
+  //Else no results will be displayed
+} else {
+  topic = ""
+  photos = <NoResults />  
+};
 
   return(
     <div className="photo-container">
@@ -39,6 +40,6 @@ const Photo = (props) => {
         </ul>
     </div>
     );
-};
+}
   
   export default Photo;

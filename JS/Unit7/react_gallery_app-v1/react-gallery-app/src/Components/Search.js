@@ -9,7 +9,7 @@ class Search extends Component {
         let path = `/photo/${searchTopic}`;
         this.props.history.push(path); 
         this.topic.value = "";
-        // this.props.performSearch(searchTopic)
+        this.props.performSearch(searchTopic)
       }
 
       render() {
