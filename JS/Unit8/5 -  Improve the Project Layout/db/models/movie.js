@@ -56,6 +56,7 @@ module.exports = (sequelize) => {
     // modelName: 'movie', // set model name to 'movie'; table name will be 'movies'
     // freezeTableName: true, // disable plural table names
     // timestamps: false, // disable timestamps
+    // paranoid: true, // enable "soft" deletes
     sequelize });
 
   return Movie;
