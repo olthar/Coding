@@ -6,6 +6,8 @@ body {
   background-size: cover;
 }
 
+
+
 h1 {
   font: 30px "Candara", serif;
   text-align: center;
@@ -60,12 +62,13 @@ h2 {
   border-top: 2px solid #e7e7e7;
   padding-top: 20px;
 }
-table {
- width: 80%;
- border-collapse: collapse;
- border-radius: 25px;
-}
 
+table {
+  border-top: 50px;
+  width: 80%;
+  border-collapse: collapse;
+  border-radius: 25px;
+}
 
 thead {
   border: 1px solid black;
@@ -77,6 +80,7 @@ thead {
 .year{
   text-align: center;
 }
+
 
 th {
   border-bottom: 3px solid #D8B493;
@@ -131,3 +135,49 @@ input[type=text] {
 .error {
   color: rgb(236, 15, 15);
 }
+
+.subheader{
+  margin-bottom: 50px;
+  height: 40px;
+}
+
+.subheader a.button{
+  float: left;
+  text-transform: uppercase;
+  font-weight: bold;
+  color: rgb(254, 254, 254);
+}
+
+  .search{
+    float: right;
+    margin-right: 20%;
+    margin-left: 0;
+    
+  }
+
+  .subheader .searchButton{
+    margin-left: 5px;
+    }
+
+.pagination{
+  margin: 40px 0 0 0;
+  text-align: center;
+}
+ 
+  .pagination li{
+    display: inline;
+  }
+
+    .pagination li a{
+      border: 1px solid #eaeaea;
+      border-radius: 5px;
+      padding: 3px 8px;
+      text-decoration: none;
+      color: #4ba6c3;
+    }
+
+    .pagination li a.active,
+    .pagination li a:hover{
+      background-color: #4ba6c3;
+      color: #fff;
+    }

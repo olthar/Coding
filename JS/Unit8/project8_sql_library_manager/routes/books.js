@@ -8,16 +8,27 @@ function asyncHandler(cb){
     try {
       await cb(req, res, next)
     } catch(error){
-    res.sendStatus(404);
+    res.render("error", {error})
     
     }
   }
 }
 
+function paginate(count){
+ const array = Array.from(new Array(count), (x, i) => i);
+  return array
+}
+
 /* get /books - Shows the full list of books. */
 router.get('/', asyncHandler(async (req, res) => {
-  const books = await Book.findAll({ order: [["createdAt", "DESC"]] });
-  res.render("books/index", {books} );
+  res.redirect("books/page/1");
+}));
+
+router.get('/page/:page', asyncHandler(async (req, res) => {
+  const books = await Book.findAll({ offset: ((req.params.page * 5)-5), limit: 5, order: [["createdAt", "DESC"]]});
+  const page_count = await Book.count()/5
+  console.log(books)
+  res.render("books/index", {books, page_count: paginate(Math.ceil(page_count)), currentPage:req.params.page, bookSearch: {} });
 }));
 
 // get /books/new - Shows the create new book form.
@@ -47,10 +58,12 @@ router.get("/:id", asyncHandler(async (req, res) => {
   if(book) {
     res.render("books/update-book", { book, title: book.title });  
   } else {
+    
     // const err = new Error("Book not found");
+    throw new Error("Book not found");
     // res.locals.message = err.message;
     // res.render("/error", {message: error})
-    res.redirect("/error" );
+    // res.redirect("/error" );
   }
 })); 
 
