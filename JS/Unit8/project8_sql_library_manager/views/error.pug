@@ -2,13 +2,7 @@ extends layout
 
 block content
   h1=message
-  if error.status==404
-    h1="I'm afraid we haven't been able to find that one"
-
-  else
-    h1=message
-
-  p
-      a.button(href='/books') Back to List of Books
+    h1="I'm afraid we haven't been able to find that page"
+    a.button(href='/books') Back to List of Books
   h2= error.status
   pre #{error.stack}
