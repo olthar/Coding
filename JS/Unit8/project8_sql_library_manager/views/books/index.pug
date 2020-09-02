@@ -5,13 +5,9 @@ block content
   p
   div.subheader
       a.button(href='/books/new') Create New Book
-      form.search(action="/search", method="post")
-        input.searchBar(name='search' type='text' value=bookSearch)
+      form.search(action=`/books`, method="post")
+        input.searchBar(name='search' type='text' value=bookSearch.search)
         input.searchButton(type='submit' value='Search')
-      
-      //- form.search(action="/search", method="post")
-      //-   input(name='search' type='text' value="Search")
-      //-   
   table
     thead
       tr
@@ -28,4 +24,5 @@ block content
           td #{book.genre}
           td.year #{book.year}
         tr
+        
   include pagination
