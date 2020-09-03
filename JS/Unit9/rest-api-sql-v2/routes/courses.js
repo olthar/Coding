@@ -22,7 +22,11 @@ function asyncHandler(cb){
 router.get('/', asyncHandler(async (req, res) => {
     const courses = await Course.findAll({
       include: [
-        {model: User, as: 'user',},
+        {
+          model: User, 
+          as: 'user',
+          // attributes: ['id', 'title', 'description'],
+        },
       ],
     });
     console.log(courses)
@@ -45,7 +49,50 @@ router.get("/:id", asyncHandler(async (req, res) => {
 
 
 // POST /api/courses 201 - Creates a course, sets the Location header to the URI for the course, and returns no content
+router.post('/', asyncHandler(async (req, res) => {
+  let course;
+  try {
+    course = await Course.create(req.body);
+    res.status(201).json(course);  
+  } catch (error) {
+    if(error.name === "SequelizeValidationError") { // checking the error
+      course = await Course.build(req.body);
+      res.status(201).json(course);    
+    } else {
+      // res.status(400).json({message: "STUFF required."});
+      throw error; 
+      // console.log(error)
+    }  
+  }
+}))
+
 // PUT /api/courses/:id 204 - Updates a course and returns no content
+router.put('/:id', asyncHandler(async (req, res) => {
+  const course = await Course.findByPk(req.params.id);
+  if(course) {
+    // course.title = req.body.title;
+    // course.description = req.body.description;
+    // course.estimatedTime = req.body.estimatedTime;
+    // course.materialsNeeded = req.body.materialsNeeded;
+    // course.userId = req.body.UserId;
+
+    await course.update(req.body);
+    res.status(204).end();
+  } else {
+    res.status(404).json({message: "Course Not Found"});
+  }
+}))
+
+
 // DELETE /api/courses/:id 204 - Deletes a course and returns no content
+router.delete('/:id/delete', asyncHandler(async (req ,res) => {
+  const course = await Course.findByPk(req.params.id);
+  if(course) {
+    await course.destroy();
+    res.status(204).end();
+  } else {
+    throw error; 
+  }
+}));
 
 module.exports = router
