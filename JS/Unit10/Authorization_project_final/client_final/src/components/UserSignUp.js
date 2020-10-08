@@ -73,6 +73,7 @@ export default class UserSignUp extends Component {
 
   submit = () => {
     const { context } = this.props;
+    console.log(context.data)
     const {
       name,
       username,
